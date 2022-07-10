@@ -17,16 +17,23 @@
 
     <div class="container bg-light">
         <div *ngFor="let item of items.results, index as i" class="mt-2">
-            <div class="row" *ngIf="i <= 3">
-                <div class="col-4 col-md-4 text-center">
-                    <img src="{{item.thumbnail}}" alt="">
-                </div>
-                <div class="col-8 col-md-8">
-                    <h4>$ {{item.price}}</h4>
-                    <p>{{item.title}}</p>
-                </div>
+            <div *ngIf="i <= 3">
+                <a class="row" style="text-decoration: none; color: black;" (click)="goTo(item.id)">
+                    <div class="col-4 col-md-4 text-center">
+                        <img src="{{item.thumbnail}}" alt="">
+                    </div>
+                    <div class="col-8 col-md-8">
+                        <h4>$ {{item.price}}</h4>
+                        <p>{{item.title}}</p>
+                    </div>
+                </a>
                 <hr>
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="container" *ngIf="active">
+    <app-detail-products [id]="id"></app-detail-products>
 </div>

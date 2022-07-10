@@ -12,7 +12,10 @@ export class ListProductsComponent implements OnInit {
   @Input() itemSearch: string = '';
   @Input() activeSearch: boolean = false;
 
+  @Input('id') id: string = ''
+
   items!: SearchItems
+  active: boolean = false;
 
   constructor(private serviceApi: MeliApiService) { }
 
@@ -39,9 +42,14 @@ export class ListProductsComponent implements OnInit {
   }
 
   initHandle(element: any) {
-    this.items = element;
-    
-    console.log(this.items);
-    
+    this.items = element;    
   }
+
+  goTo(id: string) {
+    this.active = true;
+    this.activeSearch = false;
+    this.id = id;
+  }
+
+
 }
