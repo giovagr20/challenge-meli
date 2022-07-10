@@ -18,7 +18,7 @@
     </div>
   </nav>
 
-  <div class="container mt-2"> 
+  <div class="container mt-2" *ngIf="activeSearch"> 
     <app-list-products [itemSearch]="item"
     [activeSearch]="activeSearch"></app-list-products>
   </div>

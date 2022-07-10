@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SearchItems } from 'src/app/models/searchItem';
 import { MeliApiService } from 'src/app/services/meli-api.service';
 
 @Component({
@@ -11,22 +12,36 @@ export class ListProductsComponent implements OnInit {
   @Input() itemSearch: string = '';
   @Input() activeSearch: boolean = false;
 
+  items!: SearchItems
+
   constructor(private serviceApi: MeliApiService) { }
 
   ngOnInit(): void {
   }
 
-  getItems() {
-    this.serviceApi.getItems(this.itemSearch)
-    .subscribe((e) => {
-      console.log(e)
-    },
-    (error) => {
-      this.errorHanble(error)
-    })
+  ngOnChanges()	{
+    this.getItems()
   }
 
-  errorHanble(error: any) {
+  ngOnDestroy() {
+    this.itemSearch = '';
+  }
+
+  getItems() {
+    this.serviceApi.getItems(this.itemSearch)
+    .subscribe({
+      next: this.initHandle.bind(this),
+      error: this.errorHandle.bind(this)
+    })
+  } 
+  errorHandle(error: any) {
     console.log(error);
+  }
+
+  initHandle(element: any) {
+    this.items = element;
+    
+    console.log(this.items);
+    
   }
 }

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-products',
@@ -11,7 +13,7 @@ export class SearchProductsComponent implements OnInit {
   @Input('activeSearch') activeSearch: boolean = false;
   item: string = '';
 
-  constructor( ) { }
+  constructor( private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +24,8 @@ export class SearchProductsComponent implements OnInit {
 
   searchProduct() {
     this.activeSearch = true;
+
+    this.router.navigate(['/items'], { queryParams: { search: `${this.item}` } });
   }
 
 }

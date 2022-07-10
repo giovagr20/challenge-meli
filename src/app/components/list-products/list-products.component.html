@@ -1,5 +1,32 @@
+<div *ngIf="activeSearch" class="container bg-gray-meli">
+    <!--<div class="position-absolute top-50 start-50 translate-middle">
+        <img src="../../../assets/images/loader.gif" alt="" width="50" height="50">
+    </div>-->
 
-<div *ngIf="activeSearch">
-    <p>list-products works!</p>
+    <nav style="
+      --bs-breadcrumb-divider: url(
+        &#34;data:image/svg + xml,
+        %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='currentColor'/%3E%3C/svg%3E&#34;
+      );
+    " aria-label="breadcrumb">
+        <ol class="breadcrumb" *ngIf="items.filters.length > 0">
+            <li class="breadcrumb-item"><strong> {{items.filters[1].values[0].name}} </strong></li>
+            <li class="breadcrumb-item active" aria-current="page">{{items.query}}</li>
+        </ol>
+    </nav>
+
+    <div class="container bg-light">
+        <div *ngFor="let item of items.results, index as i" class="mt-2">
+            <div class="row" *ngIf="i <= 3">
+                <div class="col-4 col-md-4 text-center">
+                    <img src="{{item.thumbnail}}" alt="">
+                </div>
+                <div class="col-8 col-md-8">
+                    <h4>$ {{item.price}}</h4>
+                    <p>{{item.title}}</p>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
 </div>
-
