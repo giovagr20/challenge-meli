@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { SearchItems } from 'src/app/models/searchItem';
 
 @Component({
   selector: 'app-detail-products',
@@ -10,10 +11,17 @@ import { Location } from '@angular/common';
 export class DetailProductsComponent implements OnInit {
 
   @Input() id: string = '';
+  @Input() activeSearch: boolean = false;
+  @Input() itemSearch: SearchItems = new SearchItems();
 
   constructor(private route: ActivatedRoute,
     private location: Location) { }
 
   ngOnInit(): void {}
+
+  goTo() {
+    this.activeSearch = true;
+  }
+  
 
 }

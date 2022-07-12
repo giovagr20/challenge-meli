@@ -19,4 +19,5 @@ export class MeliApiService {
     return this.http.get(`${this.url}sites/MLA/search`, {params})
     .pipe(map((response) => response as SearchItems));
   }
+
 }

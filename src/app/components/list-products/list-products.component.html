@@ -9,14 +9,14 @@
         %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='currentColor'/%3E%3C/svg%3E&#34;
       );
     " aria-label="breadcrumb">
-        <ol class="breadcrumb" *ngIf="items.filters.length > 0">
-            <li class="breadcrumb-item"><strong> {{items.filters[1].values[0].name}} </strong></li>
-            <li class="breadcrumb-item active" aria-current="page">{{items.query}}</li>
+        <ol class="breadcrumb" *ngIf="itemSearch.filters.length > 0">
+            <li class="breadcrumb-item"><strong> {{itemSearch.filters[1].values[0].name}} </strong></li>
+            <li class="breadcrumb-item active" aria-current="page">{{itemSearch.query}}</li>
         </ol>
     </nav>
 
     <div class="container bg-light">
-        <div *ngFor="let item of items.results, index as i" class="mt-2">
+        <div *ngFor="let item of itemSearch.results, index as i" class="mt-2">
             <div *ngIf="i <= 3">
                 <a class="row" style="text-decoration: none; color: black;" (click)="goTo(item.id)">
                     <div class="col-4 col-md-4 text-center">

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { SearchItems } from 'src/app/models/searchItem';
 import { MeliApiService } from 'src/app/services/meli-api.service';
 
@@ -9,47 +10,33 @@ import { MeliApiService } from 'src/app/services/meli-api.service';
 })
 export class ListProductsComponent implements OnInit {
 
-  @Input() itemSearch: string = '';
+  @Input() itemSearch: SearchItems = new SearchItems();
   @Input() activeSearch: boolean = false;
-
   @Input('id') id: string = ''
 
   items!: SearchItems
   active: boolean = false;
 
-  constructor(private serviceApi: MeliApiService) { }
+  parameters!: string;
+
+  constructor(private router: Router, 
+    private activateRouter: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
-
-  ngOnChanges()	{
-    this.getItems()
-  }
-
-  ngOnDestroy() {
-    this.itemSearch = '';
-  }
-
-  getItems() {
-    this.serviceApi.getItems(this.itemSearch)
-    .subscribe({
-      next: this.initHandle.bind(this),
-      error: this.errorHandle.bind(this)
+    this.activateRouter.queryParams.subscribe(params => {
+      this.parameters = params['search'];
     })
-  } 
-  errorHandle(error: any) {
-    console.log(error);
+
+    console.log(this.parameters);
+    
   }
 
-  initHandle(element: any) {
-    this.items = element;    
-  }
 
   goTo(id: string) {
     this.active = true;
     this.activeSearch = false;
     this.id = id;
+
+    this.router.navigate([`/items/${this.id}`])
   }
-
-
 }
