@@ -13,9 +13,10 @@ export class DetailProductsComponent implements OnInit {
   @Input() id: string = '';
   @Input() activeSearch: boolean = false;
   @Input() itemSearch: SearchItems = new SearchItems();
+  @Input() itemId: string = '';
+  @Input() descriptionItem: string = '';
 
-  constructor(private route: ActivatedRoute,
-    private location: Location) { }
+  constructor() { }
 
   ngOnInit(): void {}
 

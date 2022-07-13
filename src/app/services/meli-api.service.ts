@@ -20,4 +20,15 @@ export class MeliApiService {
     .pipe(map((response) => response as SearchItems));
   }
 
+
+  getItemById(id: string): Observable<string> {
+    return this.http.get(`${this.url}items/${id}`)
+    .pipe(map((response) => response as string))
+  }
+
+  getItemDescriptionById(id: string): Observable<string> {
+    return this.http.get(`${this.url}items/${id}/description`)
+    .pipe(map((response) => response as string))
+  }
+
 }
