@@ -18,7 +18,10 @@ export class DetailProductsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.itemId);
+    
+  }
 
   goTo() {
     this.activeSearch = true;
