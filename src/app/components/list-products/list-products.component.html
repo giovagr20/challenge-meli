@@ -61,7 +61,7 @@
         </ol>
     </nav>
 
-    <div class="container bg-light">
+    <div class="container bg-light mt-2 p-2">
         <div *ngFor="let item of itemSearch.results, index as i" class="mt-2">
             <div *ngIf="i <= 3">
                 <a class="row" style="text-decoration: none; color: black;" [routerLink]="['/items', item.id]">
