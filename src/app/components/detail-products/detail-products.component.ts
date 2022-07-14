@@ -14,6 +14,8 @@ import { ModelDescriptionById } from 'src/app/models/models-by-id/model-descript
 })
 export class DetailProductsComponent implements OnInit, OnDestroy {
 
+  item: string = ''
+  activeTemp: boolean = false
   id: string = ''
   sub: any
   response!: ModelById
@@ -65,4 +67,7 @@ export class DetailProductsComponent implements OnInit, OnDestroy {
     })
   }
 
+  keyUp(event: any) {
+    this.item = event.target.value
+  }
 }

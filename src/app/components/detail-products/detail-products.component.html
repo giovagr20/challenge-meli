@@ -1,3 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-meli">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <img
+        src="../../../assets/images/Logo_ML@2x.png.png"
+        alt="Mercado Libre"
+        width="50"
+        height="50"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarScroll"
+      aria-controls="navbarScroll"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <div class="ubication pe-6">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Nunca dejes de buscar"
+          (keyup)="keyUp($event)"
+        />
+        <a
+          class="btn btn-outline-meli"
+          type="submit"
+          [routerLink]="['/items']" [queryParams]="{search: item}"
+        >
+          <img
+            src="../../../assets/images/ic_Search@2x.png.png"
+            alt="Buscar Meli"
+            width="20"
+            height="20"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
 <div class="container mt-2" *ngIf="!active">
   <div class="position-absolute top-50 start-50">
     <img

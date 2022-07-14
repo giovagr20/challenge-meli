@@ -56,7 +56,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
     })
   }
 
-  handleResponse(element: SearchItems) {
+  handleResponse(element: SearchItems) {    
     this.itemSearch = element
     this.activeSearch = true
   }
