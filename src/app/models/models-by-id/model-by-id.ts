@@ -1,3 +1,5 @@
+import { Picture } from "./picture";
+
 export interface ModelById {
   id:                               string;
   site_id:                          string;
@@ -23,7 +25,7 @@ export interface ModelById {
   thumbnail_id:                     string;
   thumbnail:                        string;
   secure_thumbnail:                 string;
-  pictures:                         any[];
+  pictures:                         Array<Picture>;
   video_id:                         null;
   descriptions:                     any[];
   accepts_mercadopago:              boolean;

@@ -1,52 +1,67 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { SearchItems } from 'src/app/models/searchItem';
 import { MeliApiService } from 'src/app/services/meli-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.css'],
 })
-export class ListProductsComponent implements OnInit {
-  @Input() itemSearch: SearchItems = new SearchItems();
-  @Input() activeSearch: boolean = false;
-  @Input('id') id: string = '';
-  @Input('itemId') itemId: string = '';
-  @Input('descriptionItem') descriptionItem: string = '';
-
-  items!: SearchItems;
-  active: boolean = false;
-
-  parameters!: string;
+export class ListProductsComponent implements OnInit, OnDestroy {
+  itemSearch: SearchItems = new SearchItems();
+  activeSearch: boolean = false;
+  item: string = '';
+  param: string = '';
+  sub: any;
 
   constructor(
-    private router: Router,
     private activateRouter: ActivatedRoute,
+    private router: Router,
     private apiService: MeliApiService
   ) {}
 
   ngOnInit(): void {
-    this.activateRouter.queryParams.subscribe((params) => {
-      this.parameters = params['search'];
-    });
+    
+    this.activeSearch = false
+    this.sub = this.activateRouter.queryParams.subscribe(params => {
+      this.param = params['search']
+    })
 
-    console.log(this.parameters);
+    console.log(this.param);
+    
+    if (this.param === '') {
+      Swal.fire('Por favor ingresa parametro de busqueda')
+      this.activeSearch = true
+    } else {
+      this.searchItem(this.param)
+    }
   }
 
-  goTo(id: string) {
-    this.active = true;
-    this.activeSearch = false;
-    this.id = id;
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
+  keyUp(event: any) {
+    this.item = event.target.value;
+  }
 
-    this.router.navigate([`/items/${this.id}`]);
+  searchItem(item: string) {
+    this.activeSearch = false
+    this.router.navigate(['/items'], {queryParams: {search: item}})
 
-    this.apiService.getItemById(id).subscribe({
-      next: (d) => (this.itemId = d),
-    });
+    this.apiService.getItems(item).subscribe({
+      next: this.handleResponse.bind(this),
+      error: this.handleError.bind(this)
+    })
+  }
 
-    this.apiService.getItemDescriptionById(id).subscribe({
-      next: (e) => (this.descriptionItem = e),
-    });
+  handleResponse(element: SearchItems) {    
+    this.itemSearch = element
+    this.activeSearch = true
+  }
+
+  handleError(error: any) {
+    alert(`Ha ocurrido un error ${error}`)
   }
 }
