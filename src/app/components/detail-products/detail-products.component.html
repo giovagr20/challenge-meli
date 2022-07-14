@@ -1,13 +1,32 @@
-<div class="container">
-    <div class="row">
-        <p>{{itemId}}</p>
-
-        <pre>{{descriptionItem}}</pre>
+<div class="container mt-2" *ngIf="!active">
+    <div class="position-absolute top-50 start-50">
+        <img src="../../../assets/images/loader.gif" alt="" width="100" height="100">
     </div>
 </div>
 
 
-<div class="container mt-2" *ngIf="activeSearch"> 
-    <app-list-products [itemSearch]="itemSearch"
-    [activeSearch]="activeSearch"></app-list-products>
-  </div>
+<div class="container mt-2" *ngIf="active">
+    <div class="row">
+        <div class="col-4">
+            <img src="{{response.pictures[0].url}}" alt="{{response.title}}" class="img-fluid img-thumbnail">
+        </div>
+
+        <div class="col-8 text-center">
+            <p> {{response.condition}} - {{response.initial_quantity}} </p>
+            <h4 class="h4"> {{response.title}} </h4>
+            <h2 class="h2"> ${{response.price}} </h2>
+            <br>
+            <button class="btn btn-primary">Comprar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h3>
+                Descripcion del producto
+            </h3>
+            <p>
+                {{responseDescription.plain_text}}
+            </p>
+        </div>
+    </div>
+</div>
