@@ -30,7 +30,7 @@
         <a
           class="btn btn-outline-meli"
           type="submit"
-          [routerLink]="['/items']" [queryParams]="{search: item}"
+          (click)="searchItem(item)"
         >
           <img
             src="../../../assets/images/ic_Search@2x.png.png"

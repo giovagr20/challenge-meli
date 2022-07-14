@@ -33,6 +33,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
     
     if (this.param === '') {
       Swal.fire('Por favor ingresa parametro de busqueda')
+      this.activeSearch = true
     } else {
       this.searchItem(this.param)
     }
@@ -46,6 +47,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
   }
 
   searchItem(item: string) {
+    this.activeSearch = false
     this.router.navigate(['/items'], {queryParams: {search: item}})
 
     this.apiService.getItems(item).subscribe({
